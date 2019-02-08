@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .container
+    h1=title
+    label(for='searchIns') Search: 
+    input#search.form-control.autocomplete.ui-autocomplete(type='text', name='searchIns', placeholder='Name of the institute')  
+    p 
+      table#myTable.table
+        thead
+          tr
+            th Name
+            th GeoJSON
+            th Picture
+            th Faculty
+        tbody
+          each institute, i in institutes
+            tr
+              td
+                a(href="/" + institute._id)= institute.name
+              td= institute.json
+              td
+                img(src=institute.url, alt='Pic', style='float:right;width:50px;height:50px;')
+              td= institute.fac 
+                          
+  script(src='javascripts/institutes.js')
+  script(src='javascripts/tableSearch.js')

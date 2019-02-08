@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  .container
+    .row
+      h1=title
+      .col-md-5
+        .form-group
+          label(for='name') Name: 
+          input#nameInput.form-control(type='text', name='name', placeholder='Name for drawn institute')
+          label(for='pic') URL (including a picture):
+          input#picInput.form-control(type='url', name='picture', placeholder='https://...')  
+          label(for='faculty') Faculty:
+          input#facList.form-control(list='facultylist', name='facultylist', placeholder="Select faculty")
+          datalist#facultylist
+            each faculty, i in faculties
+              option(value=faculty.shortcut)= faculty.name
+          h3 Choose your preferred input of the geojson data:
+          button#draw.btn.btn-info(type='button') Draw
+          button#url.btn.btn-info(type='button') URL
+          button#raw.btn.btn-info(type='button') Raw      
+      .col-md-7            
+        .form-group.georaw        
+          h3 Include an institute using geojson data:
+          textarea#geoJSONta.form-control(name='gjsontext', rows='8', cols='50', placeholder='{"type": "Feature","geometry": {"type": "Point","coordinates": [125.6, 10.1]},"properties": {"name": "Dinagat Islands","img":"https://www.uni-muenster.de/imperia/md/images/physik_ap/institut/eingang_ap.jpg"}}')
+          br
+          button#loadta.btn.btn-success.form-control(type='submit', onclick='savegeoJSONtextToDatabase()') Save institute based on geojson data to database
+        .form-group.geourl
+          // button and text field for uploading a geojson file
+          h3 Paste a URL containing GeoJSON in the textfield
+          label(for='url') URL (including geojson data):
+          input#urlinput.form-control(type='url', value='https://www.dropbox.com/s/g4uatp03mnvtca7/GeoJSON.txt?dl=1' placeholder='https://www.dropbox.com/s/g4uatp03mnvtca7/GeoJSON.txt?dl=1')
+          br
+          #demo
+            button.btn.btn-success.form-control(type='button', onclick='loadDoc()') Save institute based on geojson data from external URL to database
+        .form-group.geodraw
+          button#load.btn.btn-success.form-control(type='submit', onclick='saveDrawnInstituteToDatabase()') Save drawn institute to Database        
+          #map
+          p
+            a#delete.btn.btn-danger(href='#map') Clear drawn features in map
+
+  script(src='javascripts/createInstitute.js')

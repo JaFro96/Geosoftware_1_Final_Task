@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .container
+    h1 This is a list of the routes
+    p
+    label(for='searchRoute') Search: 
+    input#search.form-control.searchfield(type='text', name='searchRoute', placeholder='Name of the Route')  
+    label(for='searchStart') Search for starting point: 
+    input#searchSecond.form-control.searchfield(type='text', name='searchStart', placeholder='Starting address')  
+    label(for='searchEnd') Search for ending point: 
+    input#searchEnd.form-control.searchfield(type='text', name='searchEnd', placeholder='Ending address')  
+    p
+      table#myTable.table
+        thead
+          tr
+            th Name
+            th Start
+            th End
+        tbody
+          each route, i in routes
+            tr
+              td
+                a(href='/route/'+route._id)= route.name 
+              td= route.start
+              td= route.end
+  script(src='javascripts/tableSearch.js')

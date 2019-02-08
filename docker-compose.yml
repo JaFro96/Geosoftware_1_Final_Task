@@ -1,0 +1,23 @@
+# Short template to get started with dockerizing node.js apps (with mongodb databases)
+# Course: Geosoft I
+# Author: Auriol Degbelo
+# Last modified: June 2018
+
+version: "3" # version of docker-compose
+services:
+  webapp: # name of the service
+    image: jafro96/abschlussaufgabe
+    build: ./
+    command: npm start
+    ports:
+      - "3000:3000" # inform docker about ports on which the service is accessible
+    depends_on:
+      - mongoservice
+  mongoservice: # name of the service
+    image: mongo # name of the image to retrieve from Docker Hub (see https://hub.docker.com/_/mongo/)
+    ports:
+      - "27017:27017" # inform docker about ports on which the service is accessible
+  mongoadmin:  # name of the service
+    image: mrvautin/adminmongo # name of the image to retrieve from Docker Hub (see https://hub.docker.com/r/mrvautin/adminmongo/)
+    ports:
+      - "1234:1234" # inform docker about ports on which the service is accessible

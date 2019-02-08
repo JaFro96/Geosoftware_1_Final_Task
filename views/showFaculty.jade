@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .container
+    .row
+      .form-group
+        h1= 'Editing faculty: '+ name
+        form(method="POST", action='/faculty/'+shortcut+'/edit')
+          label(for='name') Name:
+          input#facname.form-control(type="text",  name="name", value=name)
+          label(for='shortcut') Shortcut:
+          input#facsc.form-control(type="text", name="shortcut", value=shortcut)
+          label(for='website') Website:
+          input#facurl.form-control(type="url", name="website", value=website)
+          label(for='institutes') Institutes:
+          p#inslist
+            input.form-control(type="text", name="institutes", value=institutes, disabled)
+          p
+          input#sendchanges.form-control(type="submit", value="Send changes")
+      .form-group
+        form(action="/faculty/"+id+"/delete")
+          input#hidlist.form-control(type="hidden", name="institutes", value=institutes)
+          button#deletefac.btn.btn-danger.form-control(type="submit") 
+            span.glyphicon.glyphicon-trash 
+            |   Delete this one!
+        
+  script(src='/javascripts/faculties.js')

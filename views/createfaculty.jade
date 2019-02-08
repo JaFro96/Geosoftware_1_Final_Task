@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    .row
+      h1=title
+      .form-group
+        form(action='/createfaculty', method='POST')
+          label(for='name') Name: 
+          input#nameInput.form-control(name='name', placeholder='Name for the faculty', type='text', required)
+          br
+          label(for='shortcut') Shortcut: 
+          input#scInput.form-control(type='text', name='shortcut', placeholder='FB01', required)
+          br  
+          label(for='website') Website:
+          input#website.form-control(type='url', name='website', placeholder='https://www.uni-muenster.de/wwu/fak_fb/fb1.html', required)
+          br
+          input#createfac.form-control(type="submit", value="Save faculty")
+
+  script(src='javascripts/faculties.js')

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container
+    .row
+      .form-group
+        h1= 'Editing Route: '+ name
+        form(method="POST", action='/route/'+id+'/edit')
+          label(for='name') Name:
+          input#routeName.form-control(type="text",  name="name", value=name)
+          label(for='start') Start:
+          input#routeStart.form-control(type="text", name="start", value=start)
+          label(for='website') Website:
+          input#routeEnd.form-control(type="text", name="end", value=end)
+          input#send.form-control(type="submit", value="Send changes")
+      #map
+      .form-group
+        form(action="/route/"+id+"/delete")
+          button#deleteroute.btn.btn-danger.form-control(type="submit") 
+            span.glyphicon.glyphicon-trash 
+            |   Delete this one!
+            
+  script(src='/javascripts/map.js')
+  

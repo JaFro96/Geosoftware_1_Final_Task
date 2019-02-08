@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container
+    h1=title
+    .row
+      label(for='searchFac') Search for names: 
+      input#search.form-control.searchfield(type='text', name='searchFac', placeholder='Name of the Faculty')  
+      label(for='searchShortcut') Search for specific shortcut: 
+      input#searchSecond.form-control.searchfield(type='text', name='searchFac', placeholder='Shortcut: e.g. FB01')  
+
+      p
+        table#myTable.table
+          thead
+            tr
+              th Name
+              th Shortcut
+              th Website
+              th Institutes
+          tbody
+            each faculty, i in faculties
+              tr
+                td
+                  a(href='/faculty/'+faculty._id)= faculty.name
+                td= faculty.shortcut
+                td= faculty.website
+                td= faculty.institutes
+  script(src='javascripts/faculties.js')
+  script(src='javascripts/tableSearch.js')

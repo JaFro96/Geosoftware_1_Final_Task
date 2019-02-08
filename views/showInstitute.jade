@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-5
+        .form-group
+          form(action="/"+id+"/delete", method="POST")
+            input.form-control(type="hidden", class="target",  name="name", value=name)
+            button.btn.btn-danger.form-control(type="submit") 
+              span.glyphicon.glyphicon-trash 
+              |   Delete this one!
+        .form-group
+          h1= 'Editing institute: '+ name
+          form(method="POST", action='/'+id+'/edit')
+            label(for='name') Name:
+            input#name.form-control(type="text", class="target",  name="name", value=name)
+            label(for='picurl') URL:
+            input#picurl.form-control(type="url", class="target", name="picurl", value=picurl)
+            label(for='geometry') GeoJSON:
+            input#geometry.form-control(type="textarea", name="geojson", value=text)
+            label(for='faculty') Faculty:
+            input#facList.form-control(list='facultylist', name='facultylist', value=fac)
+            datalist#facultylist
+              each faculty, i in faculties
+                option(value=faculty.shortcut)= faculty.name      
+            p
+            input.form-control(type="submit", value="Send changes")
+            
+          // Picture of the institute
+          img.image-responsive.img-rounded(src=picurl, alt='Picture', width='400', height='400')
+      .col-md-7
+        button#change.form-control.btn.btn-success(type="button") Change to this geometry
+        #map    
+        button#routing.form-control.btn.btn-info(type="button") Let's get some food!
+        .form-group
+          form(method="POST", action='/createRoute')
+            label(for='name', class="routing") Name:
+            input.form-control(type="text", class="routing",  name="name", placeholder="Route to canteen")
+            input#start.form-control(type="hidden", name="start")
+            input#end.form-control(type="hidden", name = "end")        
+            input#send.form-control(type="submit", class="routing", value="Save this route!")
+      script(src='javascripts/showInstitute.js')
+      script(src='javascripts/canteen.js')

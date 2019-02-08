@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    h1=title
+    .row
+      .form-group
+        form(action='/createRoute', method='POST')
+          input.form-control(type="text", name="name", placeholder="Name for the route", required) 
+          input#routeStart.form-control(type="hidden", name="start")
+          input#routeEnd.form-control(type="hidden", name = "end")
+          input#send.form-control(type="submit", value="Save Route")
+      
+      button#computeRoutes.btn.btn-success.form-control(type='button') Compute Routes
+      button#dontcompute.btn.btn-warning.form-control(type='button') Don't compute Routes
+
+    .row
+      #map
+    input#geoIns.form-control(type="hidden", value=geojsonsInsitutes)
+      
+  script(src='/javascripts/map.js')
+  script(src='/javascripts/canteen.js')
