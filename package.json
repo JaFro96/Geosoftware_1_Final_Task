@@ -17,7 +17,7 @@
     "jsnlog": "^2.28.0",
     "jsnlog-nodejs": "^2.28.0",
     "leaflet-routing-machine": "^3.2.9",
-    "mongodb": "^3.0.10",
+    "mongodb": "^3.1.13",
     "monk": "^6.0.5",
     "morgan": "~1.9.0",
     "should": "^13.2.3"
